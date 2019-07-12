@@ -3,7 +3,7 @@ using WebActivatorEx;
 using Pixburb.Action;
 using Swashbuckle.Application;
 
-[assembly: PreApplicationStartMethod(typeof(SwaggerConfig), "Register")]
+//[assembly: PreApplicationStartMethod(typeof(SwaggerConfig), "Register")]
 
 namespace Pixburb.Action
 {

@@ -13,6 +13,7 @@ namespace Pixburb.Reader
 
             // Web API routes
             config.MapHttpAttributeRoutes();
+            SwaggerConfig.Register();
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
