@@ -8,8 +8,7 @@ namespace Pixburb.CommonModel
 {
     public enum OperationOutcomeStatus
     {
-        Success = 0,
-        Rejection = 1,
-        Failure = 2
+        Failure = 0,
+        Success = 1
     }
 }
