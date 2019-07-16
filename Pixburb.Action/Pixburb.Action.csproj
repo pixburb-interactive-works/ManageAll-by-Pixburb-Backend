@@ -146,6 +146,8 @@
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AdminLoginController.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
+    <Compile Include="Controllers\InventoryController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -176,6 +178,10 @@
     <ProjectReference Include="..\Pixburb.Business.Interface\Pixburb.Business.Interface.csproj">
       <Project>{C4C9B871-BFC2-4FB5-AF35-353F0835F28D}</Project>
       <Name>Pixburb.Business.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Pixburb.CommonModel\Pixburb.CommonModel.csproj">
+      <Project>{82062413-0119-47BC-B377-C17B00CA49BD}</Project>
+      <Name>Pixburb.CommonModel</Name>
     </ProjectReference>
     <ProjectReference Include="..\Pixburb.DataAccess.Implementation\Pixburb.DataAccess.Implementation.csproj">
       <Project>{932170DF-AD87-42B6-86C7-006552869514}</Project>

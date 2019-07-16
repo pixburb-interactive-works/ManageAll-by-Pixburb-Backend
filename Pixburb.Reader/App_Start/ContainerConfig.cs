@@ -77,6 +77,8 @@ namespace Pixburb.Reader.App_Start
         {
             container.Register<IAdminLoginReader, AdminLoginReader>();
             container.Register<IAdminLoginDataReader, AdminLoginDataReader>();
+            container.Register<IInventoryReader, InventoryReader>();
+            container.Register<IInventoryDataReader, InventoryDataReader>();
         }
 
         #endregion Private helpers

@@ -43,6 +43,10 @@
   <ItemGroup>
     <Compile Include="IAdminLoginReader.cs" />
     <Compile Include="IAdminLoginWriter.cs" />
+    <Compile Include="ICategoryReader.cs" />
+    <Compile Include="ICategoryWriter.cs" />
+    <Compile Include="IInventoryReader.cs" />
+    <Compile Include="IInventoryWriter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

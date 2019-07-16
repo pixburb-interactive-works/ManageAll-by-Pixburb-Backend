@@ -77,6 +77,10 @@ namespace Pixburb.Action.App_Start
         {
             container.Register<IAdminLoginWriter, AdminLoginWriter>();
             container.Register<IAdminLoginDataWriter, AdminLoginDataWriter>();
+            container.Register<IInventoryWriter, InventoryWriter>();
+            container.Register<IInventoryDataWriter, InventoryDataWriter>();
+            container.Register<ICategoryWriter, CategoryWriter>();
+            container.Register<ICategoryDataWriter, CategoryDataWriter>();
         }
 
         #endregion Private helpers

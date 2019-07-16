@@ -33,6 +33,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -43,6 +44,10 @@
   <ItemGroup>
     <Compile Include="AdminLoginReader.cs" />
     <Compile Include="AdminLoginWriter.cs" />
+    <Compile Include="CategoryReader.cs" />
+    <Compile Include="CategoryWriter.cs" />
+    <Compile Include="InventoryReader.cs" />
+    <Compile Include="InventoryWriter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -53,6 +58,10 @@
     <ProjectReference Include="..\Pixburb.CommonModel\Pixburb.CommonModel.csproj">
       <Project>{82062413-0119-47BC-B377-C17B00CA49BD}</Project>
       <Name>Pixburb.CommonModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Pixburb.DataAccess.Implementation\Pixburb.DataAccess.Implementation.csproj">
+      <Project>{932170DF-AD87-42B6-86C7-006552869514}</Project>
+      <Name>Pixburb.DataAccess.Implementation</Name>
     </ProjectReference>
     <ProjectReference Include="..\Pixburb.DataAccess.Interface\Pixburb.DataAccess.Interface.csproj">
       <Project>{047E4583-56D2-4213-939D-F87F338A7AFD}</Project>
