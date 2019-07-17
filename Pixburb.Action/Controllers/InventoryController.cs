@@ -10,7 +10,7 @@ using System.Web.Http;
 
 namespace Pixburb.Action.Controllers
 {
-    [RoutePrefix("api/v1/Inventory")]
+    //[RoutePrefix("api/v1/Inventory")]
     public class InventoryController : ApiController
     {
         private readonly IInventoryWriter inventoryWriter;

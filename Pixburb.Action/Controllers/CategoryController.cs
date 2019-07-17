@@ -10,7 +10,7 @@ using System.Web.Http;
 
 namespace Pixburb.Action.Controllers
 {
-    [RoutePrefix("api/v1/category")]
+    [RoutePrefix("api/v1/Category")]
     public class CategoryController : ApiController
     {
         private readonly ICategoryWriter categoryWriter;

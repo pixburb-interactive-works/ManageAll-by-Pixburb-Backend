@@ -1,4 +1,5 @@
-﻿using Pixburb.DataAccess.Interface;
+﻿using Pixburb.CommonModel;
+using Pixburb.DataAccess.Interface;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -13,25 +14,69 @@ namespace Pixburb.DataAccess.Implementation
     {
         string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["PixBurb"].ConnectionString;
 
-        public Task<object> GetCategory()
+        public Task<List<Categories>> GetCategory()
+        {
+            
+            SqlConnection conn = new SqlConnection(connectionString);
+            conn.Open();
+
+            SqlCommand cmd = conn.CreateCommand();
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = "Get_Category";
+            var reader = cmd.ExecuteReader();
+
+            List<Category> categories = new List<Category>();
+            while (reader.Read())
+            {
+                Category category = new Category();
+                category.Id = Convert.ToInt32(reader["Category_Id"]);
+                if (reader["Parent_Id"] != DBNull.Value)
+                {
+                    category.ParentId = Convert.ToInt32(reader["Parent_Id"]); 
+                }
+                category.CategoryName = Convert.ToString(reader["CategoryName"]);
+                categories.Add(category);
+            }
+
+            conn.Close();
+            List<Categories> cat = new List<Categories>();
+            cat = this.FillRecursive(categories, null);
+
+            return Task.FromResult(cat);
+        }
+
+        public List<Categories> FillRecursive(List<Category> flatObjects, int? parentId = null)
+        {
+            return flatObjects.Where(x => x.ParentId.Equals(parentId)).Select(item => new Categories
+            {
+                Id = item.Id,
+                ParentId = item.ParentId,
+                CategoryName = item.CategoryName,
+                SubCategories = FillRecursive(flatObjects, item.Id)
+            }).ToList();
+        }
+
+        public Task<List<CategoryBase>> GetCategoryLOV()
         {
             SqlConnection conn = new SqlConnection(connectionString);
             conn.Open();
 
             SqlCommand cmd = conn.CreateCommand();
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "GET_CATEGORY";
-
-            var success = cmd.Parameters.Add(new SqlParameter(parameterName: "@IsSuccess", dbType: SqlDbType.VarChar, size: 50, direction: ParameterDirection.Output, isNullable: true, precision: 2, scale: 2, sourceColumn: "", sourceVersion: DataRowVersion.Current, value: ""));
-            var message = cmd.Parameters.Add(new SqlParameter(parameterName: "@Message", dbType: SqlDbType.VarChar, size: 50, direction: ParameterDirection.Output, isNullable: true, precision: 2, scale: 2, sourceColumn: "", sourceVersion: DataRowVersion.Current, value: ""));
+            cmd.CommandText = "Get_Category";
             var reader = cmd.ExecuteReader();
 
-            while(reader.HasRows)
+            List<CategoryBase> categories = new List<CategoryBase>();
+            while (reader.Read())
             {
-
+                CategoryBase category = new CategoryBase();
+                category.Id = Convert.ToInt32(reader["Category_Id"]);
+                category.CategoryName = Convert.ToString(reader["CategoryName"]);
+                categories.Add(category);
             }
 
-            return Task.FromResult(object);
+            conn.Close();
+            return Task.FromResult(categories);
         }
     }
 }

@@ -27,7 +27,7 @@ namespace Pixburb.DataAccess.Implementation
 
             cmd.Parameters.Add(new SqlParameter("@Id", CommonHelper.RemoveDefaultValue(category.Id)));
             cmd.Parameters.Add(new SqlParameter("@ParentId", CommonHelper.RemoveDefaultValue(category.ParentId)));
-            cmd.Parameters.Add(new SqlParameter("@Category", CommonHelper.RemoveDefaultValue(category.CategoryName)));
+            cmd.Parameters.Add(new SqlParameter("@Category", category.CategoryName));
             cmd.Parameters.Add(new SqlParameter("@RecordStatus", CommonHelper.RemoveDefaultValue(category.RecordStatus)));
             var success = cmd.Parameters.Add(new SqlParameter(parameterName: "@IsSuccess", dbType: SqlDbType.VarChar, size: 50, direction: ParameterDirection.Output, isNullable: true, precision: 2, scale: 2, sourceColumn: "", sourceVersion: DataRowVersion.Current, value: ""));
             var message = cmd.Parameters.Add(new SqlParameter(parameterName: "@Message", dbType: SqlDbType.VarChar, size: 50, direction: ParameterDirection.Output, isNullable: true, precision: 2, scale: 2, sourceColumn: "", sourceVersion: DataRowVersion.Current, value: ""));

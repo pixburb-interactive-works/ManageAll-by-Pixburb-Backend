@@ -41,10 +41,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Categories.cs" />
     <Compile Include="Category.cs" />
-    <Compile Include="OperationOutcome.cs" />
-    <Compile Include="OperationOutcomeMessage.cs" />
-    <Compile Include="OperationOutcomeStatus.cs" />
+    <Compile Include="CategoryBase.cs" />
+    <Compile Include="MasterBase.cs" />
+    <Compile Include="OperationOutcome\OperationOutcome.cs" />
+    <Compile Include="OperationOutcome\OperationOutcomeMessage.cs" />
+    <Compile Include="OperationOutcome\OperationOutcomeStatus.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
