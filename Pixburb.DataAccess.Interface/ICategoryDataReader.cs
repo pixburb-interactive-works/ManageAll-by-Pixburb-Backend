@@ -8,5 +8,6 @@ namespace Pixburb.DataAccess.Interface
 {
     public interface ICategoryDataReader
     {
+        Task<object> GetCategory();
     }
 }

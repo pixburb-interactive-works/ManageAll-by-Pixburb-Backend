@@ -8,5 +8,6 @@ namespace Pixburb.Business.Interface
 {
     public interface ICategoryReader
     {
+        Task<Object> GetCategory();
     }
 }

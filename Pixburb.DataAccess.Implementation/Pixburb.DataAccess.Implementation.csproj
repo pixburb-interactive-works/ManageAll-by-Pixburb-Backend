@@ -49,6 +49,7 @@
     <Compile Include="AdminLoginDataWriter.cs" />
     <Compile Include="CategoryDataReader.cs" />
     <Compile Include="CategoryDataWriter.cs" />
+    <Compile Include="Helpers\CommonHelper.cs" />
     <Compile Include="InventoryDataReader.cs" />
     <Compile Include="InventoryDataWriter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -26,10 +26,10 @@ namespace Pixburb.DataAccess.Implementation
 
             cmd.Parameters.Add(new SqlParameter("@UserName", email));
             cmd.Parameters.Add(new SqlParameter("@Password", password));
-            var status = cmd.Parameters.Add(new SqlParameter(parameterName: "@IsSuccess", dbType: SqlDbType.VarChar, size: 50, direction: ParameterDirection.Output, isNullable: true, precision: 2, scale: 2, sourceColumn: "", sourceVersion: DataRowVersion.Current, value: ""));
+            var success = cmd.Parameters.Add(new SqlParameter(parameterName: "@IsSuccess", dbType: SqlDbType.VarChar, size: 50, direction: ParameterDirection.Output, isNullable: true, precision: 2, scale: 2, sourceColumn: "", sourceVersion: DataRowVersion.Current, value: ""));
             var message = cmd.Parameters.Add(new SqlParameter(parameterName: "@Message", dbType: SqlDbType.VarChar, size: 50, direction: ParameterDirection.Output, isNullable: true, precision: 2, scale: 2, sourceColumn: "", sourceVersion: DataRowVersion.Current, value: ""));
             cmd.ExecuteReader();
-            if (Convert.ToInt32(status.Value) == 1)
+            if (Convert.ToInt32(success.Value) == 1)
             {
                 outcome = new OperationOutcome(OperationOutcomeStatus.Success);
                 outcome.Messages.Add(new OperationOutcomeMessage { Message = Convert.ToString(message.Value) });
