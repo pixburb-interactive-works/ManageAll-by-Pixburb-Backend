@@ -8,8 +8,8 @@ namespace Pixburb.CommonModel
 {
     public class Category
     {
-        public int Id { get; set; }
-        public int ParentId { get; set; }
+        public int? Id { get; set; }
+        public int? ParentId { get; set; }
         public string CategoryName { get; set; }
 
         public string RecordStatus { get; set; }

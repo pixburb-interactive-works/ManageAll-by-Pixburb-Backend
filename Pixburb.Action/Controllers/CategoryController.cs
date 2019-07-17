@@ -21,6 +21,7 @@ namespace Pixburb.Action.Controllers
         }
 
         [Route("savecategory")]
+        [HttpPost]
         public async Task<HttpResponseMessage> Category(Category category)
         {
             OperationOutcome outcome = await this.categoryWriter.Category(category);

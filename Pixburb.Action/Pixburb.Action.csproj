@@ -101,16 +101,8 @@
     <Reference Include="System.Web.Http.WebHost, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.7\lib\net45\System.Web.Http.WebHost.dll</HintPath>
     </Reference>
-    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
-    </Reference>
     <Reference Include="System.Web.Optimization">
       <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
@@ -190,10 +182,6 @@
     <ProjectReference Include="..\Pixburb.DataAccess.Interface\Pixburb.DataAccess.Interface.csproj">
       <Project>{047E4583-56D2-4213-939D-F87F338A7AFD}</Project>
       <Name>Pixburb.DataAccess.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Pixburb.Reader\Pixburb.Reader.csproj">
-      <Project>{06132D57-29F0-4F3E-89EB-A8F66040C1F6}</Project>
-      <Name>Pixburb.Reader</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
