@@ -10,7 +10,7 @@ using System.Web.Http;
 
 namespace Pixburb.Action.Controllers
 {
-    //[RoutePrefix("api/v1/Inventory")]
+    [RoutePrefix("api/v1/Inventory")]
     public class InventoryController : ApiController
     {
         private readonly IInventoryWriter inventoryWriter;
@@ -20,9 +20,10 @@ namespace Pixburb.Action.Controllers
             this.inventoryWriter = inventoryWriter;
         }
 
-        public async Task<HttpResponseMessage> Save()
+        [Route("saveInventory")]
+        public async Task<HttpResponseMessage> SaveInventory(List<Inventory> inventory)
         {
-            OperationOutcome outcome = await this.inventoryWriter.Save();
+            OperationOutcome outcome = await this.inventoryWriter.SaveInventory(inventory);
             return Request.CreateResponse(HttpStatusCode.OK, outcome);
         }
     }

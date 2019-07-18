@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 
 namespace Pixburb.Business.Implementation
 {
@@ -19,9 +20,20 @@ namespace Pixburb.Business.Implementation
             this.inventoryDataWriter = inventoryDataWriter;
         }
 
-        public async Task<OperationOutcome> Save()
+        public async Task<OperationOutcome> SaveInventory(List<Inventory> inventory)
         {
-            return await this.inventoryDataWriter.Save();
+            OperationOutcome outcome;
+            using (var scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
+            {
+                outcome = await this.inventoryDataWriter.SaveInventory(inventory);
+
+                if (outcome.Status == OperationOutcomeStatus.Success)
+                {
+                    scope.Complete();
+                }
+            }
+
+            return outcome;
         }
     }
 }

@@ -22,8 +22,9 @@ namespace Pixburb.CommonModel
         public double? LimitPerUser { get; set; }
         public DateTime? StockDate { get; set; }
         public DateTime? ValidTo { get; set; }
-        public FileAttachment Image { get; set; }
-        public List<FileAttachment> Gallery { get; set; } = new List<FileAttachment>();
+        public FileAttachment File { get; set; }
+        public List<FileAttachment> Files { get; set; } = new List<FileAttachment>();
         public string Status { get; set; }
+        public string RecordStatus { get; set; }
     }
 }

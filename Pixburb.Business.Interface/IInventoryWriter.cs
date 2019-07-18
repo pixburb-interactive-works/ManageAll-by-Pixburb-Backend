@@ -9,6 +9,6 @@ namespace Pixburb.Business.Interface
 {
     public interface IInventoryWriter
     {
-        Task<OperationOutcome> Save();
+        Task<OperationOutcome> SaveInventory(List<Inventory> inventory);
     }
 }

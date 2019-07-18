@@ -9,6 +9,6 @@ namespace Pixburb.DataAccess.Interface
 {
     public interface IInventoryDataWriter
     {
-        Task<OperationOutcome> Save();
+        Task<OperationOutcome> SaveInventory(List<Inventory> inventory);
     }
 }

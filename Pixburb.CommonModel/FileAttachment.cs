@@ -55,5 +55,7 @@ namespace Pixburb.CommonModel
         /// The name of the file.
         /// </value>
         public string FileName { get; set; }
+
+        public string RecordStatus { get; set; }
     }
 }
