@@ -44,6 +44,8 @@
     <Compile Include="Categories.cs" />
     <Compile Include="Category.cs" />
     <Compile Include="CategoryBase.cs" />
+    <Compile Include="Gallery.cs" />
+    <Compile Include="Inventory.cs" />
     <Compile Include="MasterBase.cs" />
     <Compile Include="OperationOutcome\OperationOutcome.cs" />
     <Compile Include="OperationOutcome\OperationOutcomeMessage.cs" />
