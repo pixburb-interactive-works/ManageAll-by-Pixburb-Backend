@@ -18,9 +18,11 @@ namespace Pixburb.Business.Implementation
             this.adminLoginDataReader = adminLoginDataReader;
         }
 
-        public async Task<OperationOutcome> ValidateAdmin(string email, string password)
+        public async Task<OperationOutcome> ValidateAdmin(string username, string password, string orgID)
         {
-            return await this.adminLoginDataReader.ValidateAdmin(email, password);
+            ConnectionString connectionString = await this.adminLoginDataReader.ValidateOrganization(orgID);
+            var ConnectionString = "Data Source=" + connectionString.DataSource + ";PERSIST SECURITY INFO=True;Initial Catalog=" + connectionString.DataBaseName + ";User ID=" + connectionString.UserId + ";Password=" + connectionString.Password + ";POOLING=True";
+            return await this.adminLoginDataReader.ValidateAdmin(username, password, ConnectionString);
         }
     }
 }
