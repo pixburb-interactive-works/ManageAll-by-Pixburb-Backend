@@ -14,7 +14,7 @@ namespace Pixburb.DataAccess.Implementation
     {
         string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["PixBurb"].ConnectionString;
 
-        public Task<ConnectionString> ValidateOrganization(string orgID)
+        public Task<OperationOutcome> ValidateOrganization(Admin admin)
         {
             OperationOutcome outcome = new OperationOutcome();
             SqlConnection conn = new SqlConnection(connectionString);
@@ -24,7 +24,7 @@ namespace Pixburb.DataAccess.Implementation
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.CommandText = "OrgValidation";
 
-            cmd.Parameters.Add(new SqlParameter("@OrgId", orgID));
+            cmd.Parameters.Add(new SqlParameter("@OrgId", admin.orgID));
             var success = cmd.Parameters.Add(new SqlParameter(parameterName: "@IsSuccess", dbType: SqlDbType.VarChar, size: 50, direction: ParameterDirection.Output, isNullable: true, precision: 2, scale: 2, sourceColumn: "", sourceVersion: DataRowVersion.Current, value: ""));
             var message = cmd.Parameters.Add(new SqlParameter(parameterName: "@Message", dbType: SqlDbType.VarChar, size: 50, direction: ParameterDirection.Output, isNullable: true, precision: 2, scale: 2, sourceColumn: "", sourceVersion: DataRowVersion.Current, value: ""));
             var reader = cmd.ExecuteReader();
@@ -37,11 +37,21 @@ namespace Pixburb.DataAccess.Implementation
                     connString.Password = Convert.ToString(reader["Password"]);
                     connString.DataBaseName = Convert.ToString(reader["DataBaseName"]);
                 }
+            if (connString.DataSource != null && connString.DataSource != "")
+            {
+                var ConnectionString = "Data Source=" + connString.DataSource + ";PERSIST SECURITY INFO=True;Initial Catalog=" + connString.DataBaseName + ";User ID=" + connString.UserId + ";Password=" + connString.Password + ";POOLING=True";
+                outcome = this.ValidateAdmin(admin.username, admin.password, ConnectionString);
+            }
+            else
+            {
+                outcome = new OperationOutcome(OperationOutcomeStatus.Failure);
+                outcome.Messages.Add(new OperationOutcomeMessage { Message = Convert.ToString(message.Value) });
+            }
             conn.Close();
-            return Task.FromResult(connString);
+            return Task.FromResult(outcome);
         }
 
-        public Task<OperationOutcome> ValidateAdmin(string username, string password, string ConnectionString)
+        public OperationOutcome ValidateAdmin(string username, string password, string ConnectionString)
         {
             OperationOutcome outcome = new OperationOutcome();
             SqlConnection conn = new SqlConnection(ConnectionString);
@@ -67,7 +77,7 @@ namespace Pixburb.DataAccess.Implementation
                 outcome.Messages.Add(new OperationOutcomeMessage { Message = Convert.ToString(message.Value) });
             }
             conn.Close();
-            return Task.FromResult(outcome);
+            return outcome;
         }
     }
 }

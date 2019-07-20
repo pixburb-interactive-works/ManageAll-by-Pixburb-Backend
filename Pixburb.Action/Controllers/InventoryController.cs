@@ -21,6 +21,7 @@ namespace Pixburb.Action.Controllers
         }
 
         [Route("saveInventory")]
+        [HttpPost]
         public async Task<HttpResponseMessage> SaveInventory(List<Inventory> inventory)
         {
             OperationOutcome outcome = await this.inventoryWriter.SaveInventory(inventory);

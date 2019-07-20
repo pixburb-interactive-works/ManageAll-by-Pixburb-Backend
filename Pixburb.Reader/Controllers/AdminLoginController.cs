@@ -21,15 +21,15 @@ namespace Pixburb.Reader.Controllers
         }
 
         [Route("validateAdmin")]
-        [HttpGet]
-        public async Task<HttpResponseMessage> ValidateAdmin(string username, string password, string orgID)
+        [HttpPost]
+        public async Task<HttpResponseMessage> ValidateAdmin(Admin admin)
         {
-            if ((username == null || username == "") || (password == null || password == "") || (orgID == null || orgID == ""))
+            if ((admin.username == null || admin.username == "") || (admin.password == null || admin.password == "") || (admin.orgID == null || admin.orgID == ""))
             {
                 return Request.CreateResponse(HttpStatusCode.BadRequest);
             }
 
-            OperationOutcome outcome = await this.adminLoginReader.ValidateAdmin(username,password,orgID);
+            OperationOutcome outcome = await this.adminLoginReader.ValidateAdmin(admin);
 
             return Request.CreateResponse(HttpStatusCode.OK, outcome);
         }
