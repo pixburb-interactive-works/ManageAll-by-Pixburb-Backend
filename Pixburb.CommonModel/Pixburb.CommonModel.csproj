@@ -46,6 +46,7 @@
     <Compile Include="CategoryBase.cs" />
     <Compile Include="ConnectionString.cs" />
     <Compile Include="FileAttachment.cs" />
+    <Compile Include="Inventories.cs" />
     <Compile Include="Inventory.cs" />
     <Compile Include="MasterBase.cs" />
     <Compile Include="OperationOutcome\OperationOutcome.cs" />

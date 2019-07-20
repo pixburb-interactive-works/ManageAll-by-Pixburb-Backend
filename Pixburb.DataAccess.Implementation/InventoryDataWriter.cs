@@ -88,6 +88,7 @@ namespace Pixburb.DataAccess.Implementation
                     }
                 } 
             }
+            conn.Close();
 
             return Task.FromResult(outcome);
         }
