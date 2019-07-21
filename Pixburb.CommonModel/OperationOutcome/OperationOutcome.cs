@@ -20,14 +20,6 @@ namespace Pixburb.CommonModel
 
         public OperationOutcomeStatus Status { get; set; }
 
-
-        public string IdentityValue { get; set; }
-
         public List<OperationOutcomeMessage> Messages { get; set; } = new List<OperationOutcomeMessage>();
-
-        //public void AddResult(OperationOutcomeSeverity severity, string message)
-        //{
-        //    Messages.Add(new OperationOutcomeMessage { Severity = severity, Message = message });
-        //}
     }
 }
