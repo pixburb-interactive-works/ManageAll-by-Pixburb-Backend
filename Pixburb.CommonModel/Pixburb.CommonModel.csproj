@@ -49,6 +49,7 @@
     <Compile Include="FileAttachment.cs" />
     <Compile Include="Inventories.cs" />
     <Compile Include="Inventory.cs" />
+    <Compile Include="InventoryValue.cs" />
     <Compile Include="MasterBase.cs" />
     <Compile Include="OperationOutcome\OperationOutcome.cs" />
     <Compile Include="OperationOutcome\OperationOutcomeMessage.cs" />

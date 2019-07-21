@@ -1,5 +1,6 @@
 ﻿using Pixburb.Business.Interface;
 using Pixburb.CommonModel;
+using Pixburb.DataAccess.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +11,16 @@ namespace Pixburb.Business.Implementation
 {
     public class InventoryReader : IInventoryReader
     {
-        public Task<OperationOutcome> Save()
+        private readonly IInventoryDataReader inventoryDataReader;
+
+        public InventoryReader(IInventoryDataReader inventoryDataReader)
         {
-            throw new NotImplementedException();
+            this.inventoryDataReader = inventoryDataReader;
+        }
+
+        public Task<List<InventoryValue>> GetInventory(int? userId)
+        {
+            return this.inventoryDataReader.GetInventory(userId);
         }
     }
 }
