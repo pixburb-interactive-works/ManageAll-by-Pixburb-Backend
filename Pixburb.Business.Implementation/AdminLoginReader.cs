@@ -17,10 +17,5 @@ namespace Pixburb.Business.Implementation
         {
             this.adminLoginDataReader = adminLoginDataReader;
         }
-
-        public async Task<OperationOutcome> ValidateAdmin(Admin admin)
-        {
-            return await this.adminLoginDataReader.ValidateOrganization(admin);
-        }
     }
 }

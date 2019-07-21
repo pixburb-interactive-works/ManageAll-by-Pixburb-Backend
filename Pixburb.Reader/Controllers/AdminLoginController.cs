@@ -1,4 +1,5 @@
-﻿using Pixburb.Business.Interface;
+﻿using Newtonsoft.Json;
+using Pixburb.Business.Interface;
 using Pixburb.CommonModel;
 using System;
 using System.Collections.Generic;
@@ -18,20 +19,6 @@ namespace Pixburb.Reader.Controllers
         public AdminLoginController(IAdminLoginReader adminLoginReader)
         {
             this.adminLoginReader = adminLoginReader;
-        }
-
-        [Route("validateAdmin")]
-        [HttpPost]
-        public async Task<HttpResponseMessage> ValidateAdmin(Admin admin)
-        {
-            if ((admin.username == null || admin.username == "") || (admin.password == null || admin.password == "") || (admin.orgID == null || admin.orgID == ""))
-            {
-                return Request.CreateResponse(HttpStatusCode.BadRequest);
-            }
-
-            OperationOutcome outcome = await this.adminLoginReader.ValidateAdmin(admin);
-
-            return Request.CreateResponse(HttpStatusCode.OK, outcome);
         }
     }
 }

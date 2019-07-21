@@ -1,9 +1,12 @@
-﻿using Pixburb.Business.Interface;
+﻿using Newtonsoft.Json;
+using Pixburb.Business.Interface;
+using Pixburb.CommonModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace Pixburb.Action.Controllers
@@ -18,5 +21,14 @@ namespace Pixburb.Action.Controllers
             this.adminLoginWriter = adminLoginWriter;
         }
 
+        [Route("validateAdmin")]
+        [HttpPost]
+        public async Task<HttpResponseMessage> ValidateAdmin(object value)
+        {
+            Admin admin = JsonConvert.DeserializeObject<Admin>(Convert.ToString(value));
+            OperationOutcome outcome = await this.adminLoginWriter.ValidateAdmin(admin);
+
+            return Request.CreateResponse(HttpStatusCode.OK, outcome);
+        }
     }
 }

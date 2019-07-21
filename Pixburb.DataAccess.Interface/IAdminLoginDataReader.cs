@@ -9,6 +9,5 @@ namespace Pixburb.DataAccess.Interface
 {
     public interface IAdminLoginDataReader
     {
-        Task<OperationOutcome> ValidateOrganization(Admin admin);
     }
 }

@@ -1,4 +1,5 @@
-﻿using Pixburb.Business.Interface;
+﻿using Newtonsoft.Json;
+using Pixburb.Business.Interface;
 using Pixburb.CommonModel;
 using System;
 using System.Collections.Generic;
@@ -22,9 +23,10 @@ namespace Pixburb.Action.Controllers
 
         [Route("saveInventory")]
         [HttpPost]
-        public async Task<HttpResponseMessage> SaveInventory(List<Inventory> inventory)
+        public async Task<HttpResponseMessage> SaveInventory(object inventory)
         {
-            OperationOutcome outcome = await this.inventoryWriter.SaveInventory(inventory);
+            List<Inventory> inventoryValue = JsonConvert.DeserializeObject<List<Inventory>>(Convert.ToString(inventory));
+            OperationOutcome outcome = await this.inventoryWriter.SaveInventory(inventoryValue);
             return Request.CreateResponse(HttpStatusCode.OK, outcome);
         }
     }

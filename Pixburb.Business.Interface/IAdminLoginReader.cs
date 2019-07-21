@@ -9,6 +9,6 @@ namespace Pixburb.Business.Interface
 {
     public interface IAdminLoginReader
     {
-        Task<OperationOutcome> ValidateAdmin(Admin admin);
+        
     }
 }

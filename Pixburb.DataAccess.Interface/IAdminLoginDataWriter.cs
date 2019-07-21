@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Pixburb.CommonModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,6 @@ namespace Pixburb.DataAccess.Interface
 {
     public interface IAdminLoginDataWriter
     {
+        Task<OperationOutcome> ValidateOrganization(Admin admin);
     }
 }
