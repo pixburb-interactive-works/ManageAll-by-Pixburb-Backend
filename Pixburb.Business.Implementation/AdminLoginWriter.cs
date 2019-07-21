@@ -1,5 +1,6 @@
 ﻿using Pixburb.Business.Interface;
 using Pixburb.CommonModel;
+using Pixburb.DataAccess.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +11,9 @@ namespace Pixburb.Business.Implementation
 {
     public class AdminLoginWriter : IAdminLoginWriter
     {
-        private readonly IAdminLoginWriter adminLoginDataWriter;
+        private readonly IAdminLoginDataWriter adminLoginDataWriter;
 
-        public AdminLoginWriter(IAdminLoginWriter adminLoginDataWriter)
+        public AdminLoginWriter(IAdminLoginDataWriter adminLoginDataWriter)
         {
             this.adminLoginDataWriter = adminLoginDataWriter;
         }
