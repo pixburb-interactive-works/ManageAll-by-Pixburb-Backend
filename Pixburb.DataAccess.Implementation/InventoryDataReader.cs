@@ -14,7 +14,7 @@ namespace Pixburb.DataAccess.Implementation
     {
         string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["PixBurb"].ConnectionString;
 
-        public Task<List<InventoryValue>> GetInventory(int? userId)
+        public Task<List<Inventory>> GetInventory(int? userId)
         {
             SqlConnection conn = new SqlConnection(connectionString);
             conn.Open();
@@ -24,10 +24,10 @@ namespace Pixburb.DataAccess.Implementation
             cmd.CommandText = "Get_Inventory";
             var reader = cmd.ExecuteReader();
 
-            List<InventoryValue> inventoryValues = new List<InventoryValue>();
+            List<Inventory> inventoryValues = new List<Inventory>();
             while (reader.Read())
             {
-                InventoryValue inventory = new InventoryValue();
+                Inventory inventory = new Inventory();
                 inventory.Id = Convert.ToInt32(reader["ProductId"]);
                 inventory.Name = Convert.ToString(reader["Name"]);
                 inventory.Description = Convert.ToString(reader["Description"]);
@@ -39,7 +39,7 @@ namespace Pixburb.DataAccess.Implementation
                 inventory.Tags = Convert.ToString(reader["Tags"]);
                 inventory.Stock = Convert.ToDecimal(reader["Stock"]);
                 inventory.LimitPerUser = Convert.ToDouble(reader["LimitPerUser"]);
-                inventory.Category = new Category { Id = Convert.ToInt32(reader["CategoryId"]), ParentId = Convert.ToInt32(reader["ParentId"]), CategoryName = Convert.ToString(reader["Category"]) };
+                inventory.Category = new CategoryBase { Id = Convert.ToInt32(reader["CategoryId"]), CategoryName = Convert.ToString(reader["Category"]) };
                 inventory.File = new FileAttachment { Id = Convert.ToInt32(reader["FileId"]), FileName = Convert.ToString(reader["FileName"]), FileType = Convert.ToString(reader["FileType"]), FileContent = reader["FileContent"] as byte[] };
                 inventory.StockDate = Convert.ToDateTime(reader["StockDate"]);
                 inventory.Status = Convert.ToString(reader["Status"]);

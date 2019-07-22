@@ -23,10 +23,10 @@ namespace Pixburb.Action.Controllers
 
         [Route("saveInventory")]
         [HttpPost]
-        public async Task<HttpResponseMessage> SaveInventory(object inventory)
+        public async Task<HttpResponseMessage> SaveInventory(object jsonValue)
         {
-            List<Inventory> inventoryValue = JsonConvert.DeserializeObject<List<Inventory>>(Convert.ToString(inventory));
-            OperationOutcome outcome = await this.inventoryWriter.SaveInventory(inventoryValue);
+            List<Inventory> inventory = JsonConvert.DeserializeObject<List<Inventory>>(Convert.ToString(jsonValue));
+            OperationOutcome outcome = await this.inventoryWriter.SaveInventory(inventory);
             return Request.CreateResponse(HttpStatusCode.OK, outcome);
         }
     }

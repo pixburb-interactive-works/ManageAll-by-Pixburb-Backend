@@ -1,4 +1,5 @@
-﻿using Pixburb.Business.Interface;
+﻿using Newtonsoft.Json;
+using Pixburb.Business.Interface;
 using Pixburb.CommonModel;
 using System;
 using System.Collections.Generic;
@@ -22,8 +23,9 @@ namespace Pixburb.Action.Controllers
 
         [Route("savecategory")]
         [HttpPost]
-        public async Task<HttpResponseMessage> Category(Category category)
+        public async Task<HttpResponseMessage> Category(object jsonValue)
         {
+            Category category = JsonConvert.DeserializeObject<Category>(Convert.ToString(jsonValue));
             OperationOutcome outcome = await this.categoryWriter.Category(category);
             return Request.CreateResponse(HttpStatusCode.OK, outcome);
         }

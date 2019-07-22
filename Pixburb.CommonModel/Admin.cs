@@ -10,6 +10,6 @@ namespace Pixburb.CommonModel
     {
         public string username;
         public string password;
-        public string orgID;
+        public string orgId;
     }
 }

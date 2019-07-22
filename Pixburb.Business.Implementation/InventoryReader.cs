@@ -18,7 +18,7 @@ namespace Pixburb.Business.Implementation
             this.inventoryDataReader = inventoryDataReader;
         }
 
-        public Task<List<InventoryValue>> GetInventory(int? userId)
+        public Task<List<Inventory>> GetInventory(int? userId)
         {
             return this.inventoryDataReader.GetInventory(userId);
         }

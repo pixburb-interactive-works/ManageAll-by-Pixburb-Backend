@@ -9,6 +9,6 @@ namespace Pixburb.Business.Interface
 {
     public interface IInventoryReader
     {
-        Task<List<InventoryValue>> GetInventory(int? userId);
+        Task<List<Inventory>> GetInventory(int? userId);
     }
 }

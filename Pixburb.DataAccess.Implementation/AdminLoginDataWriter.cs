@@ -24,7 +24,7 @@ namespace Pixburb.DataAccess.Implementation
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.CommandText = "OrgValidation";
 
-            cmd.Parameters.Add(new SqlParameter("@OrgId", admin.orgID));
+            cmd.Parameters.Add(new SqlParameter("@OrgId", admin.orgId));
             var success = cmd.Parameters.Add(new SqlParameter(parameterName: "@IsSuccess", dbType: SqlDbType.VarChar, size: 50, direction: ParameterDirection.Output, isNullable: true, precision: 2, scale: 2, sourceColumn: "", sourceVersion: DataRowVersion.Current, value: ""));
             var message = cmd.Parameters.Add(new SqlParameter(parameterName: "@Message", dbType: SqlDbType.VarChar, size: 50, direction: ParameterDirection.Output, isNullable: true, precision: 2, scale: 2, sourceColumn: "", sourceVersion: DataRowVersion.Current, value: ""));
             var reader = cmd.ExecuteReader();

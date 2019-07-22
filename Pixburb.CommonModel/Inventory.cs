@@ -9,7 +9,7 @@ namespace Pixburb.CommonModel
     public class Inventory
     {
         public int Id { get; set; }
-        public int Category { get; set; }
+        public CategoryBase Category { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string Vendor { get; set; }

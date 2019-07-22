@@ -9,6 +9,6 @@ namespace Pixburb.DataAccess.Interface
 {
     public interface IInventoryDataReader
     {
-        Task<List<InventoryValue>> GetInventory(int? userId);
+        Task<List<Inventory>> GetInventory(int? userId);
     }
 }
