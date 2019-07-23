@@ -1,4 +1,5 @@
 ﻿using Pixburb.CommonModel;
+using Pixburb.DataAccess.Implementation.Log;
 using Pixburb.DataAccess.Interface;
 using System;
 using System.Collections.Generic;
@@ -12,9 +13,11 @@ namespace Pixburb.DataAccess.Implementation
 {
     public class AdminLoginDataWriter : IAdminLoginDataWriter
     {
+        WriteLog log = new WriteLog();
+
         string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["PixBurb"].ConnectionString;
 
-        public Task<OperationOutcome> ValidateOrganization(Admin admin)
+        public async Task<OperationOutcome> ValidateOrganization(Admin admin)
         {
             OperationOutcome outcome = new OperationOutcome();
             SqlConnection conn = new SqlConnection(connectionString);
@@ -28,6 +31,7 @@ namespace Pixburb.DataAccess.Implementation
             var success = cmd.Parameters.Add(new SqlParameter(parameterName: "@IsSuccess", dbType: SqlDbType.VarChar, size: 50, direction: ParameterDirection.Output, isNullable: true, precision: 2, scale: 2, sourceColumn: "", sourceVersion: DataRowVersion.Current, value: ""));
             var message = cmd.Parameters.Add(new SqlParameter(parameterName: "@Message", dbType: SqlDbType.VarChar, size: 50, direction: ParameterDirection.Output, isNullable: true, precision: 2, scale: 2, sourceColumn: "", sourceVersion: DataRowVersion.Current, value: ""));
             var reader = cmd.ExecuteReader();
+            await log.WriteDbLogAsync(cmd.CommandText, cmd.Parameters);
 
             ConnectionString connString = new ConnectionString();
             while (reader.Read())
@@ -48,7 +52,7 @@ namespace Pixburb.DataAccess.Implementation
                 outcome.Messages.Add(new OperationOutcomeMessage { Message = Convert.ToString(message.Value) });
             }
             conn.Close();
-            return Task.FromResult(outcome);
+            return outcome;
         }
 
         public OperationOutcome ValidateAdmin(string username, string password, string ConnectionString)
