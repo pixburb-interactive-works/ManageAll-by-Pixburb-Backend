@@ -16,6 +16,7 @@ namespace Pixburb.Action
         {
             GlobalConfiguration.Configure(WebApiConfig.Register);
             ContainerConfig.Initialize();
+            log4net.Config.XmlConfigurator.Configure();
         }
     }
 }

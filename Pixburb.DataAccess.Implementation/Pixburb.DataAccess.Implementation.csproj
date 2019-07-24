@@ -59,8 +59,6 @@
     <Compile Include="InventoryDataReader.cs" />
     <Compile Include="InventoryDataWriter.cs" />
     <Compile Include="Log\WriteLog.cs" />
-    <Compile Include="Log\LogAccess.cs" />
-    <Compile Include="Log\LoggingManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

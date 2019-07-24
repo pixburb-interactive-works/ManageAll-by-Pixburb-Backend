@@ -2,11 +2,8 @@
 using Pixburb.DataAccess.Implementation.Log;
 using Pixburb.DataAccess.Interface;
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Pixburb.DataAccess.Implementation
@@ -44,7 +41,7 @@ namespace Pixburb.DataAccess.Implementation
             if (connString.DataSource != null && connString.DataSource != "")
             {
                 var ConnectionString = "Data Source=" + connString.DataSource + ";PERSIST SECURITY INFO=True;Initial Catalog=" + connString.DataBaseName + ";User ID=" + connString.UserId + ";Password=" + connString.Password + ";POOLING=True";
-                outcome = this.ValidateAdmin(admin.username, admin.password, ConnectionString);
+                outcome = await this.ValidateAdmin(admin.username, admin.password, ConnectionString);
             }
             else
             {
@@ -55,7 +52,7 @@ namespace Pixburb.DataAccess.Implementation
             return outcome;
         }
 
-        public OperationOutcome ValidateAdmin(string username, string password, string ConnectionString)
+        public async Task<OperationOutcome> ValidateAdmin(string username, string password, string ConnectionString)
         {
             OperationOutcome outcome = new OperationOutcome();
             SqlConnection conn = new SqlConnection(ConnectionString);
@@ -70,6 +67,7 @@ namespace Pixburb.DataAccess.Implementation
             var success = cmd.Parameters.Add(new SqlParameter(parameterName: "@IsSuccess", dbType: SqlDbType.VarChar, size: 50, direction: ParameterDirection.Output, isNullable: true, precision: 2, scale: 2, sourceColumn: "", sourceVersion: DataRowVersion.Current, value: ""));
             var message = cmd.Parameters.Add(new SqlParameter(parameterName: "@Message", dbType: SqlDbType.VarChar, size: 50, direction: ParameterDirection.Output, isNullable: true, precision: 2, scale: 2, sourceColumn: "", sourceVersion: DataRowVersion.Current, value: ""));
             cmd.ExecuteReader();
+            await log.WriteDbLogAsync(cmd.CommandText, cmd.Parameters);
             if (Convert.ToInt32(success.Value) == 1)
             {
                 outcome = new OperationOutcome(OperationOutcomeStatus.Success);
