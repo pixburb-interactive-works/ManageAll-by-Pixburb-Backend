@@ -30,5 +30,13 @@ namespace Pixburb.Action.Controllers
 
             return Request.CreateResponse(HttpStatusCode.OK, outcome);
         }
+
+        public async Task<HttpResponseMessage> ForgotPassword(object value)
+        {
+            Admin admin = JsonConvert.DeserializeObject<Admin>(Convert.ToString(value));
+            OperationOutcome outcome = await this.adminLoginWriter.ForgotPassword(admin.username);
+
+            return Request.CreateResponse(HttpStatusCode.OK, outcome);
+        }
     }
 }

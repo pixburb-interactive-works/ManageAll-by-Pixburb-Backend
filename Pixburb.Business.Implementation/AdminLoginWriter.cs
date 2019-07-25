@@ -22,5 +22,10 @@ namespace Pixburb.Business.Implementation
         {
             return await this.adminLoginDataWriter.ValidateOrganization(admin);
         }
+
+        public async Task<OperationOutcome> ForgotPassword(string email)
+        {
+            return await this.adminLoginDataWriter.ForgotPassword(email);
+        }
     }
 }

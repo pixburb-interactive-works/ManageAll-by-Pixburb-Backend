@@ -10,5 +10,7 @@ namespace Pixburb.Business.Interface
     public interface IAdminLoginWriter
     {
         Task<OperationOutcome> ValidateAdmin(Admin admin);
+
+        Task<OperationOutcome> ForgotPassword(string email);
     }
 }

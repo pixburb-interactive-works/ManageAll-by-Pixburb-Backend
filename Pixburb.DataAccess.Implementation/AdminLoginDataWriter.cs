@@ -1,10 +1,13 @@
 ﻿using Pixburb.CommonModel;
 using Pixburb.DataAccess.Implementation.Log;
 using Pixburb.DataAccess.Interface;
+using SendGrid;
+using SendGrid.Helpers.Mail;
 using System;
 using System.Data;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
+using System.Web.Security;
 
 namespace Pixburb.DataAccess.Implementation
 {
@@ -80,6 +83,28 @@ namespace Pixburb.DataAccess.Implementation
             }
             conn.Close();
             return outcome;
+        }
+
+        public Task<OperationOutcome> ForgotPassword(string email)
+        {
+            OperationOutcome outcome = new OperationOutcome();
+            string randomPassword = Membership.GeneratePassword(6, 0);
+            SendMail(randomPassword, email);
+            return Task.FromResult<OperationOutcome>(outcome);
+        }
+
+        public void SendMail(string randomPassword,string email)
+        {
+            //var apiKey = Environment.GetEnvironmentVariable("NAME_OF_THE_ENVIRONMENT_VARIABLE_FOR_YOUR_SENDGRID_KEY");
+            var apiKey = "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";
+            var client = new SendGridClient(apiKey);
+            var from = new EmailAddress("PixBurb@gmail.com", "PixBurb");
+            var subject = "PixBurb Password Recovery";
+            var to = new EmailAddress(email, "User");
+            var plainTextContent = "Use " + randomPassword + " as your password to Login";
+            var htmlContent = "Use " + "<strong>" + randomPassword + "</strong>" + " as your Temporary Password to Login.";
+            var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
+            var response = client.SendEmailAsync(msg);
         }
     }
 }
