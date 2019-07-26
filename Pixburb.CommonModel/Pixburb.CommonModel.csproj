@@ -41,18 +41,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Admin.cs" />
-    <Compile Include="Categories.cs" />
-    <Compile Include="Category.cs" />
-    <Compile Include="CategoryBase.cs" />
-    <Compile Include="ConnectionString.cs" />
-    <Compile Include="FileAttachment.cs" />
-    <Compile Include="Inventories.cs" />
-    <Compile Include="Inventory.cs" />
+    <Compile Include="Admin\Admin.cs" />
+    <Compile Include="Category\Categories.cs" />
+    <Compile Include="Category\Category.cs" />
+    <Compile Include="Category\CategoryBase.cs" />
+    <Compile Include="Admin\ConnectionString.cs" />
+    <Compile Include="Inventory\FileAttachment.cs" />
+    <Compile Include="Inventory\Inventories.cs" />
+    <Compile Include="Inventory\Inventory.cs" />
     <Compile Include="MasterBase.cs" />
     <Compile Include="OperationOutcome\OperationOutcome.cs" />
     <Compile Include="OperationOutcome\OperationOutcomeMessage.cs" />
     <Compile Include="OperationOutcome\OperationOutcomeStatus.cs" />
+    <Compile Include="Order\Order.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
