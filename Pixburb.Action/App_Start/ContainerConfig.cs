@@ -81,6 +81,8 @@ namespace Pixburb.Action.App_Start
             container.Register<IInventoryDataWriter, InventoryDataWriter>();
             container.Register<ICategoryWriter, CategoryWriter>();
             container.Register<ICategoryDataWriter, CategoryDataWriter>();
+            container.Register<IOrderWriter, OrderWriter>();
+            container.Register<IOrderDataWriter, OrderDataWriter>();
         }
 
         #endregion Private helpers

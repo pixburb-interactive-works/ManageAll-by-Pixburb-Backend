@@ -47,6 +47,8 @@
     <Compile Include="ICategoryDataWriter.cs" />
     <Compile Include="IInventoryDataReader.cs" />
     <Compile Include="IInventoryDataWriter.cs" />
+    <Compile Include="IOrderDataWriter.cs" />
+    <Compile Include="IOrderDataReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

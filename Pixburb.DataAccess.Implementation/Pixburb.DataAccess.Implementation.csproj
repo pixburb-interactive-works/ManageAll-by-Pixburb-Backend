@@ -77,6 +77,8 @@
     <Compile Include="InventoryDataReader.cs" />
     <Compile Include="InventoryDataWriter.cs" />
     <Compile Include="Log\WriteLog.cs" />
+    <Compile Include="OrderDataReader.cs" />
+    <Compile Include="OrderDataWriter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
