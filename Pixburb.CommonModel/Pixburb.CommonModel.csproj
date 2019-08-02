@@ -54,6 +54,8 @@
     <Compile Include="OperationOutcome\OperationOutcomeMessage.cs" />
     <Compile Include="OperationOutcome\OperationOutcomeStatus.cs" />
     <Compile Include="Order\Order.cs" />
+    <Compile Include="Order\OrderItems.cs" />
+    <Compile Include="Order\PlaceOrder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

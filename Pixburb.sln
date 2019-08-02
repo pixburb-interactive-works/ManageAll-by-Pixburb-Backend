@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29009.5
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.421
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Api", "Api", "{22E2DA2C-B1CB-4EA0-A19B-8480DE91D6E0}"
 EndProject
@@ -17,13 +17,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataAccess", "DataAccess", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pixburb.Business.Interface", "Pixburb.Business.Interface\Pixburb.Business.Interface.csproj", "{C4C9B871-BFC2-4FB5-AF35-353F0835F28D}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Interface", "Interface", "{E89D8DA1-D18A-46DE-97FB-E82C3D0C099C}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Contracts", "Contracts", "{E89D8DA1-D18A-46DE-97FB-E82C3D0C099C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Implementation", "Implementation", "{A3FCFB5E-3845-483A-9C81-DB4E58613688}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pixburb.Business.Implementation", "Pixburb.Business.Implementation\Pixburb.Business.Implementation.csproj", "{E5285C3F-636F-43CF-8362-C5C2A72C89AE}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Interface", "Interface", "{8521632B-4D53-4A06-ADB0-157D330F99B3}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Contracts", "Contracts", "{8521632B-4D53-4A06-ADB0-157D330F99B3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Implementation", "Implementation", "{66C87963-CF06-4EB4-8E77-7631168B1901}"
 EndProject

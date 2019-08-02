@@ -20,13 +20,13 @@ namespace Pixburb.Action.Controllers
             this.orderWriter = orderWriter;
         }
 
-        [Route("savecategory")]
+        [Route("placeorder")]
         [HttpPost]
-        public async Task<HttpResponseMessage> Category(object jsonValue)
+        public async Task<HttpResponseMessage> PlaceOrder(object jsonValue)
         {
-            Category category = JsonConvert.DeserializeObject<Category>(Convert.ToString(jsonValue));
-            //OperationOutcome outcome = await this.categoryWriter.Category(category);
-            //return Request.CreateResponse(HttpStatusCode.OK, outcome);
+            List<PlaceOrder> placeOrder = JsonConvert.DeserializeObject<List<PlaceOrder>>(Convert.ToString(jsonValue));
+            OperationOutcome outcome = await this.orderWriter.PlaceOrder(placeOrder);
+            return Request.CreateResponse(HttpStatusCode.OK, outcome);
         }
     }
 }
