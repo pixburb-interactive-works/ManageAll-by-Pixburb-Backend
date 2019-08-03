@@ -63,7 +63,7 @@ namespace Pixburb.DataAccess.Implementation
 
             SqlCommand cmd = conn.CreateCommand();
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "UserValidation";
+            cmd.CommandText = "AdminValidation";
 
             cmd.Parameters.Add(new SqlParameter("@UserName", username));
             cmd.Parameters.Add(new SqlParameter("@Password", password));
