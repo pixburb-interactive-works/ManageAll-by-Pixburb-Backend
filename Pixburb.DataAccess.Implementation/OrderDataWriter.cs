@@ -23,28 +23,21 @@ namespace Pixburb.DataAccess.Implementation
 
             SqlCommand cmd = conn.CreateCommand();
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "Put_Inventory";
+            cmd.CommandText = "Put_Order";
 
             foreach (var item in placeOrder)
             {
-                //var productId = cmd.Parameters.Add(new SqlParameter(parameterName: "@Id", dbType: SqlDbType.VarChar, size: 50, direction: ParameterDirection.Output, isNullable: true, precision: 2, scale: 2, sourceColumn: "", sourceVersion: DataRowVersion.Current, value: CommonHelper.RemoveDefaultValue(item.Id)));
-                //var productId = cmd.Parameters.Add(new SqlParameter("@Id", CommonHelper.RemoveDefaultValue(item.Id)));
-                //cmd.Parameters.Add(new SqlParameter("@CategoryId", CommonHelper.RemoveDefaultValue(item.Category)));
-                //cmd.Parameters.Add(new SqlParameter("@Name", CommonHelper.RemoveDefaultValue(item.Name)));
-                //cmd.Parameters.Add(new SqlParameter("@Description", CommonHelper.RemoveDefaultValue(item.Description)));
-                //cmd.Parameters.Add(new SqlParameter("@Vendor", CommonHelper.RemoveDefaultValue(item.Vendor)));
-                //cmd.Parameters.Add(new SqlParameter("@Location", CommonHelper.RemoveDefaultValue(item.Location)));
-                //cmd.Parameters.Add(new SqlParameter("@BatchCode", CommonHelper.RemoveDefaultValue(item.BatchCode)));
-                //cmd.Parameters.Add(new SqlParameter("@Price", CommonHelper.RemoveDefaultValue(item.Price)));
-                //cmd.Parameters.Add(new SqlParameter("@Featured", CommonHelper.RemoveDefaultValue(item.Featured)));
-                //cmd.Parameters.Add(new SqlParameter("@Tags", CommonHelper.RemoveDefaultValue(item.Tags)));
-                //cmd.Parameters.Add(new SqlParameter("@Stock", CommonHelper.RemoveDefaultValue(item.Stock)));
-                //cmd.Parameters.Add(new SqlParameter("@LimitPerUser", CommonHelper.RemoveDefaultValue(item.LimitPerUser)));
-                //cmd.Parameters.Add(new SqlParameter("@FileName", CommonHelper.RemoveDefaultValue(item.File.FileName)));
-                //cmd.Parameters.Add(new SqlParameter("@FileType", CommonHelper.RemoveDefaultValue(item.File.FileType)));
-                //cmd.Parameters.Add(new SqlParameter("@FileContent", CommonHelper.RemoveDefaultValue(item.File.FileContent)));
-                //cmd.Parameters.Add(new SqlParameter("@Status", CommonHelper.RemoveDefaultValue(item.Status)));
-                //cmd.Parameters.Add(new SqlParameter("@RecordStatus", CommonHelper.RemoveDefaultValue(item.RecordStatus)));
+                var orderId = cmd.Parameters.Add(new SqlParameter("@Id", CommonHelper.RemoveDefaultValue(item.Id)));
+                cmd.Parameters.Add(new SqlParameter("@UserId", CommonHelper.RemoveDefaultValue(item.CustomerId)));
+                cmd.Parameters.Add(new SqlParameter("@UserName", CommonHelper.RemoveDefaultValue(item.CustomerName)));
+                cmd.Parameters.Add(new SqlParameter("@AddressId", CommonHelper.RemoveDefaultValue(item.AddressId)));
+                cmd.Parameters.Add(new SqlParameter("@Address", CommonHelper.RemoveDefaultValue(item.Address)));
+                cmd.Parameters.Add(new SqlParameter("@City", CommonHelper.RemoveDefaultValue(item.City)));
+                cmd.Parameters.Add(new SqlParameter("@State", CommonHelper.RemoveDefaultValue(item.State)));
+                cmd.Parameters.Add(new SqlParameter("@PinCode", CommonHelper.RemoveDefaultValue(item.PinCode)));
+                cmd.Parameters.Add(new SqlParameter("@PhoneNo", CommonHelper.RemoveDefaultValue(item.PhoneNumber)));
+                cmd.Parameters.Add(new SqlParameter("@Email", CommonHelper.RemoveDefaultValue(item.Email)));
+                cmd.Parameters.Add(new SqlParameter("@RecordStatus", CommonHelper.RemoveDefaultValue(item.RecordStatus)));
                 var success = cmd.Parameters.Add(new SqlParameter(parameterName: "@IsSuccess", dbType: SqlDbType.VarChar, size: 50, direction: ParameterDirection.Output, isNullable: true, precision: 2, scale: 2, sourceColumn: "", sourceVersion: DataRowVersion.Current, value: ""));
                 var message = cmd.Parameters.Add(new SqlParameter(parameterName: "@Message", dbType: SqlDbType.VarChar, size: 50, direction: ParameterDirection.Output, isNullable: true, precision: 2, scale: 2, sourceColumn: "", sourceVersion: DataRowVersion.Current, value: ""));
                 cmd.ExecuteNonQuery();
@@ -56,10 +49,39 @@ namespace Pixburb.DataAccess.Implementation
                 }
                 else
                 {
-                    outcome = new OperationOutcome(OperationOutcomeStatus.Failure);
-                    outcome.Messages.Add(new OperationOutcomeMessage { Message = Convert.ToString(message.Value) });
+                    var IdentityValue = Convert.ToInt32(orderId.Value);
+
+                    SqlCommand attachmetcmd = conn.CreateCommand();
+                    attachmetcmd.CommandType = CommandType.StoredProcedure;
+                    attachmetcmd.CommandText = "Put_OrderItems";
+
+                    foreach (var orderitem in item.OrderItems)
+                    {
+                        cmd.Parameters.Add(new SqlParameter("@Id", CommonHelper.RemoveDefaultValue(orderitem.Id)));
+                        cmd.Parameters.Add(new SqlParameter("@OrderId", CommonHelper.RemoveDefaultValue(IdentityValue)));
+                        cmd.Parameters.Add(new SqlParameter("@ProductId", CommonHelper.RemoveDefaultValue(orderitem.ProductId)));
+                        cmd.Parameters.Add(new SqlParameter("@Quantity", CommonHelper.RemoveDefaultValue(orderitem.Quantity)));
+                        cmd.Parameters.Add(new SqlParameter("@Price", CommonHelper.RemoveDefaultValue(orderitem.Price)));
+                        cmd.Parameters.Add(new SqlParameter("@RecordStatus", CommonHelper.RemoveDefaultValue(orderitem.RecordStatus)));
+                        var attachmentSuccess = cmd.Parameters.Add(new SqlParameter(parameterName: "@IsSuccess", dbType: SqlDbType.VarChar, size: 50, direction: ParameterDirection.Output, isNullable: true, precision: 2, scale: 2, sourceColumn: "", sourceVersion: DataRowVersion.Current, value: ""));
+                        var attachmentMessage = cmd.Parameters.Add(new SqlParameter(parameterName: "@Message", dbType: SqlDbType.VarChar, size: 50, direction: ParameterDirection.Output, isNullable: true, precision: 2, scale: 2, sourceColumn: "", sourceVersion: DataRowVersion.Current, value: ""));
+
+                        attachmetcmd.ExecuteNonQuery();
+
+                        if (Convert.ToInt32(success.Value) == 1)
+                        {
+                            outcome = new OperationOutcome(OperationOutcomeStatus.Success);
+                            outcome.Messages.Add(new OperationOutcomeMessage { Message = Convert.ToString(message.Value) });
+                        }
+                        else
+                        {
+                            outcome = new OperationOutcome(OperationOutcomeStatus.Failure);
+                            outcome.Messages.Add(new OperationOutcomeMessage { Message = Convert.ToString(message.Value) });
+                        }
+                    }
                 }
             }
+            conn.Close();
 
             return Task.FromResult<OperationOutcome>(outcome);
         }

@@ -18,6 +18,8 @@ namespace Pixburb.CommonModel
         public double PinCode { get; set; }
         public double PhoneNumber { get; set; }
         public string Email { get; set; }
+        public string RecordStatus { get; set; }
         public List<OrderItems> OrderItems { get; set; } = new List<OrderItems>();
+
     }
 }
