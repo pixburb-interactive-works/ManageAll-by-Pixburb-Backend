@@ -12,6 +12,8 @@ namespace Pixburb.CommonModel
         public int? ParentId { get; set; }
         public string CategoryName { get; set; }
 
+        public FileAttachment Image { get; set; }
+
         public string RecordStatus { get; set; }
     }
 }

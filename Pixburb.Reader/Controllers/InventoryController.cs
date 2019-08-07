@@ -20,6 +20,8 @@ namespace Pixburb.Reader.Controllers
             this.inventoryReader = inventoryReader;
         }
 
+        [Route("getInventory")]
+        [HttpGet]
         public async Task<List<Inventory>> GetInventory(int? userId)
         {
             return await this.inventoryReader.GetInventory(userId);

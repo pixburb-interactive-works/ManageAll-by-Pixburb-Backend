@@ -35,6 +35,8 @@ namespace Pixburb.DataAccess.Implementation
                     category.ParentId = Convert.ToInt32(reader["Parent_Id"]); 
                 }
                 category.CategoryName = Convert.ToString(reader["CategoryName"]);
+                category.Image.FileName = Convert.ToString(reader["ImageName"]);
+                category.Image.FileContent = Encoding.ASCII.GetBytes(Convert.ToString((reader["ImageContent"])));
                 categories.Add(category);
             }
 
